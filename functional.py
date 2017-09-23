@@ -5,6 +5,8 @@ import random
 import time
 
 
+
+
 class IgFollower:
     
     url = 'https://www.instagram.com/'
@@ -21,7 +23,7 @@ class IgFollower:
         ' AppleWebKit/537.36 (KHTML, like Gecko)' \
             ' Chrome/58.0.3029.110 Safari/537.36'
 
-error = 0
+    error = 0
     error_ban = 3
     time_ban = 2 * 60 * 60
     
@@ -31,11 +33,7 @@ error = 0
     follow_counter = 0
     followed_users = []
     
-    def __init__(self, login, password,
-                 follow_list=[],
-                 follow_per_day=0,
-                 ):
-        
+    def __init__(self, login, password,follow_list=[], follow_per_day=0,):        
         self.follow_list = follow_list
         self.follow_per_day = follow_per_day
         self.time_in_day = 24 * 60 * 60
@@ -78,7 +76,7 @@ error = 0
             list_name[node['node']['username']] = node['node']['id']
 
 def login(self):
-    print('Let\'s log in as {}...\n'.format(self.user_login))
+        print('Let\'s log in as {}...\n'.format(self.user_login))
         self.s.headers.update({'accept-encoding': self.accept_encoding,
                               'accept-language': self.accept_language,
                               'cache_control': self.cache_control,
@@ -88,165 +86,164 @@ def login(self):
                               'user-agent': self.user_agent,
                               'x-instagram-ajax': '1',
                               'x-requested-with': 'XMLHttpRequest'})
-            r = self.s.get(self.url)
-            self.s.headers.update({'x-csrftoken': r.cookies['csrftoken']})
-            time.sleep(7 * random.random())
-            login = self.s.post(self.url_login, data=
+        r = self.s.get(self.url)
+        self.s.headers.update({'x-csrftoken': r.cookies['csrftoken']})
+        time.sleep(7 * random.random())
+        login = self.s.post(self.url_login, data=
                                 {'username': self.user_login, 'password': self.user_password},
                                 allow_redirects=True)
-                                self.token = login.cookies['csrftoken']
-                                self.s.headers.update({'x-csrftoken': self.token})
-                                time.sleep(7 * random.random())
-                                
-                                if login.status_code == 200:
-                                    r = self.s.get('https://www.instagram.com/')
-                                        finder = r.text.find(self.user_login)
-                                            if finder != -1:
-                                                self.login_status = True
-                                                    print('{} logged in successfully!'.format(self.user_login))
-                                                        else:
-                                                            self.login_status = False
-                                                                print('Login error.')
-                                                            else:
-                                                                print('Login error. Try again.')
-                                                                    print('\nGoing to follow some people now......\n')
+        self.token = login.cookies['csrftoken']
+        self.s.headers.update({'x-csrftoken': self.token})
+        time.sleep(7 * random.random())
+        
+        if login.status_code == 200:
+            r = self.s.get('https://www.instagram.com/')
+            finder = r.text.find(self.user_login)
+            if finder != -1:
+                self.login_status = True
+                print('{} logged in successfully!'.format(self.user_login))
+            else:
+                self.login_status = False
+                print('Login error.')
+        else:
+            print('Login error. Try again.')
+#print('\nGoing to follow some people now......\n')
 
 def user_list_for_fol(self, user):
     users_to_follow = {}
-        url_nodes = ['https://www.instagram.com/graphql/query/?query_id=17851374694183129&id={}&first=4000',
-                     'https://www.instagram.com/graphql/query/?query_id=17851374694183129&id={}'
-                     '&first=3000&after=AQAuODyN1Ijd4jF2cCk1lEvvzZVMj0zY5z7HAvYjgimcULkEsLD5-9Z'
-                     '_fL5ziAksC15bhF2mHug4NaZOu31sNi805iEau3KmzbSdcTeeZUVb-A',
-                     'https://www.instagram.com/graphql/query/?query_id=17851374694183129&id={}'
-                     '&first=3000&after=AQAlT3VL2doRrdWUYF-u5jiNBbSxdEJegIQY_Wn1SyDZoahq-IoYJL-'
-                     '0P8agynYpxkqqHAjirLOBJUO9HF6unFEnF6PApO0bLGyyo1UroD05iA',
-                     'https://www.instagram.com/graphql/query/?query_id=17851374694183129&id={}'
-                     '&first=3000&after=AQDAdUhh0eouxqgORVmAMYF-wSSPHwmAjotXmyleYK5UfdXCLWTJuX'
-                     'b1NFEoJsKalDLSOIBjuSDXESWTr0qVGVfYEDO9H1eLvtWPDSA-01gezA',
-                     'https://www.instagram.com/graphql/query/?query_id=17851374694183129&id={}'
-                     '&first=3000&after=AQDUKAahtakE3ajjavacHLItlXUON0QD1kyQwA1lC3se384L0VmwrZa'
-                     '0YzA4_Z9oaNXklJjHXLDoPuXW08Y8eG8h2N83_N1EoEk8lxmvQKV3YQ']
-            
-                     url_followed = ['https://www.instagram.com/graphql/query/?query_id=17874545323001329&id={}&first=1000',
-                                     'https://www.instagram.com/graphql/query/?query_id=17874545323001329&id={}'
-                                     '&first=1000&after=AQCFOtHdRh4ca3puR3nY07ZuDGqjNcKPeXJHUgvJ3ka0pJk-c0BOzo5'
-                                     'RhB2a3XxqWCdprCniR3jUqp_OVAfbThflbavhcjDrGoFp3S7j1a_5Uw',
-                                     'https://www.instagram.com/graphql/query/?query_id=17874545323001329&id={}'
-                                     '&first=1000&after=AQAmc8mg5Shs3v0Gq1xukoKuuNsem4d_LOYo-kYb0MWotlbZkynpYS'
-                                     'cvbaoD6BlX-9qtdUQy-LekiRUy4q6AhBRDvmJ5WjrrKSFJUnioLU4nkg',
-                                     'https://www.instagram.com/graphql/query/?query_id=17874545323001329&id={}'
-                                     '&first=1000&after=AQCbMJO2X_dwAMFobpcDS0w3Q9sn_1U04TSDQjHw2hhJYTEl9Dh6DpwC'
-                                     'Rg0VpSxv3sInt4Gl5eGQEDj_yMPejNfGGoYIXV7DgdYrIyBgCf-ryg']
-                     try:
-                         print('Getting {} user\'s id'.format(user))
-                             users_id = self.find_user_id(user)
-                                 print('User\'s id is ' + str(users_id))
-                             except:
-                                 print('Getting id did not work')
-                                     
-                                     print('Getting number of followers...')
-                                         num_of_followers = self.find_user_num_of_follower(user)
-                                             print("Number of followers: " + str(num_of_followers))
-                                                 if num_of_followers > 4000:
-                                                     for i in url_nodes:
-                                                         try:
-                                                             self.getting_users_to_list(i, users_id, users_to_follow)
-                                                                 print('Adding users...')
-                                                                     except:
-                                                                         print('Adding users in a loop did not work.')
-                                                                             else:
-                                                                                 try:
-                                                                                     self.getting_users_to_list(url_nodes[0], users_id, users_to_follow)
-                                                                                         if len(users_to_follow) == 0:
-                                                                                             self.getting_users_to_list(url_nodes[1], users_id, users_to_follow)
-                                                                                                 print('{} users are added without looping'.format(user))
-                                                                                                     except:
-                                                                                                         print('Adding users to a list did not work.')
-                                                                                                             for i in url_followed:
-                                                                                                                 try:
-                                                                                                                     print('Now checking existing followers...')
-                                                                                                                         counter_followed_users = 0
-                                                                                                                             owners_id = self.find_user_id(self.user_login)
-                                                                                                                                 r = self.s.get(i.format(owners_id))
-                                                                                                                                     data = json.loads(r.text)
-                                                                                                                                         nodes = data['data']['user']['edge_follow']['edges']
-                                                                                                                                             for node in nodes:
-                                                                                                                                                 followers_name = node['node']['username']
-                                                                                                                                                     counter_followed_users += 1
-                                                                                                                                                         if followers_name in users_to_follow:
-                                                                                                                                                             print('Removing: ')
-                                                                                                                                                                 print(followers_name)
-                                                                                                                                                                     users_to_follow.pop(followers_name)
-                                                                                                                                                                         print('From this round you have: ' + str(counter_followed_users) + ' users')
-                                                                                                                                                                             except:
-                                                                                                                                                                                 print('Checking existing followers did not work.')
-                                                                                                                                                                                     return users_to_follow
+    url_nodes = ['https://www.instagram.com/graphql/query/?query_id=17851374694183129&id={}&first=4000',
+                 'https://www.instagram.com/graphql/query/?query_id=17851374694183129&id={}'
+                 '&first=3000&after=AQAuODyN1Ijd4jF2cCk1lEvvzZVMj0zY5z7HAvYjgimcULkEsLD5-9Z'
+                 '_fL5ziAksC15bhF2mHug4NaZOu31sNi805iEau3KmzbSdcTeeZUVb-A',
+                 'https://www.instagram.com/graphql/query/?query_id=17851374694183129&id={}'
+                 '&first=3000&after=AQAlT3VL2doRrdWUYF-u5jiNBbSxdEJegIQY_Wn1SyDZoahq-IoYJL-'
+                 '0P8agynYpxkqqHAjirLOBJUO9HF6unFEnF6PApO0bLGyyo1UroD05iA',
+                 'https://www.instagram.com/graphql/query/?query_id=17851374694183129&id={}'
+                 '&first=3000&after=AQDAdUhh0eouxqgORVmAMYF-wSSPHwmAjotXmyleYK5UfdXCLWTJuX'
+                 'b1NFEoJsKalDLSOIBjuSDXESWTr0qVGVfYEDO9H1eLvtWPDSA-01gezA',
+                 'https://www.instagram.com/graphql/query/?query_id=17851374694183129&id={}'
+                 '&first=3000&after=AQDUKAahtakE3ajjavacHLItlXUON0QD1kyQwA1lC3se384L0VmwrZa'
+                 '0YzA4_Z9oaNXklJjHXLDoPuXW08Y8eG8h2N83_N1EoEk8lxmvQKV3YQ']
+        
+    url_followed = ['https://www.instagram.com/graphql/query/?query_id=17874545323001329&id={}&first=1000',
+                 'https://www.instagram.com/graphql/query/?query_id=17874545323001329&id={}'
+                 '&first=1000&after=AQCFOtHdRh4ca3puR3nY07ZuDGqjNcKPeXJHUgvJ3ka0pJk-c0BOzo5'
+                 'RhB2a3XxqWCdprCniR3jUqp_OVAfbThflbavhcjDrGoFp3S7j1a_5Uw',
+                 'https://www.instagram.com/graphql/query/?query_id=17874545323001329&id={}'
+                 '&first=1000&after=AQAmc8mg5Shs3v0Gq1xukoKuuNsem4d_LOYo-kYb0MWotlbZkynpYS'
+                 'cvbaoD6BlX-9qtdUQy-LekiRUy4q6AhBRDvmJ5WjrrKSFJUnioLU4nkg',
+                 'https://www.instagram.com/graphql/query/?query_id=17874545323001329&id={}'
+                 '&first=1000&after=AQCbMJO2X_dwAMFobpcDS0w3Q9sn_1U04TSDQjHw2hhJYTEl9Dh6DpwC'
+                 'Rg0VpSxv3sInt4Gl5eGQEDj_yMPejNfGGoYIXV7DgdYrIyBgCf-ryg']
+    try:
+        print('Getting {} user\'s id'.format(user))
+        users_id = self.find_user_id(user)
+        print('User\'s id is ' + str(users_id))
+    except:
+        print('Getting id did not work')
+        print('Getting number of followers...')
+        num_of_followers = self.find_user_num_of_follower(user)
+        print("Number of followers: " + str(num_of_followers))
+        if num_of_followers > 4000:
+                for i in url_nodes:
+                 try:
+                     self.getting_users_to_list(i, users_id, users_to_follow)
+                     print('Adding users...')
+                 except:
+                     print('Adding users in a loop did not work.')
+        else:
+            try:
+             self.getting_users_to_list(url_nodes[0], users_id, users_to_follow)
+             if len(users_to_follow) == 0:
+               self.getting_users_to_list(url_nodes[1], users_id, users_to_follow)
+               print('{} users are added without looping'.format(user))
+            except:
+               print('Adding users to a list did not work.')
+               for i in url_followed:
+                   try:
+                    print('Now checking existing followers...')
+                    counter_followed_users = 0
+                    owners_id = self.find_user_id(self.user_login)
+                    r = self.s.get(i.format(owners_id))
+                    data = json.loads(r.text)
+                    nodes = data['data']['user']['edge_follow']['edges']
+                    for node in nodes:
+                        followers_name = node['node']['username']
+                        counter_followed_users += 1
+                        if followers_name in users_to_follow:
+                            print('Removing: ')
+                            print(followers_name)
+                            users_to_follow.pop(followers_name)
+                            print('From this round you have: ' + str(counter_followed_users) + ' users')
+                   except:
+                     print('Checking existing followers did not work.')
+                     return users_to_follow
 
 def follow_users(self):
     if self.login_status:
         new_list_to_follow = set()
-            for every_user in self.follow_list:
-                users_to_follow = {}
-                users_to_follow = self.user_list_for_fol(every_user)
-                for key in users_to_follow:
-                    try:
-                        key_ers = self.find_user_num_of_follower(key)
-                        key_ing = self.find_user_num_of_following(key)
-                    except:
-                        print('Could not check users data')
-                    if key_ers < 2000 and key_ing < 500:
-                        new_list_to_follow.add(users_to_follow[key])
-        print('We need to follow: ', str(len(new_list_to_follow)))
-            for each_user in new_list_to_follow:
-                url_follow = 'https://www.instagram.com/web/friendships/{}/follow/'.format(each_user)
+        for every_user in self.follow_list:
+            users_to_follow = {}
+            users_to_follow = self.user_list_for_fol(every_user)
+            for key in users_to_follow:
                 try:
-                    follow = self.s.post(url_follow)
-                    if follow.status_code == 200:
-                        self.follow_counter += 1
-                        self.followed_users.append(each_user)
-                        print('Followed {}'.format(each_user))
-                        print('Going to sleep now.')
-                        time.sleep(self.sleep_delay * 0.9 + self.sleep_delay * 0.2 * random.random())
-                        if self.unfollow:
-                            while self.follow_counter >= self.follow_per_day * 2:
-                                self.unfollow_users()
-                    elif follow.status_code == 400:
-                        print('Did not follow, code 400.')
-                        self.code_400()
+                    key_ers = self.find_user_num_of_follower(key)
+                    key_ing = self.find_user_num_of_following(key)
                 except:
-                    print("Except on follow!")
+                    print('Could not check users data')
+                if key_ers < 2000 and key_ing < 500:
+                    new_list_to_follow.add(users_to_follow[key])
+        print('We need to follow: ', str(len(new_list_to_follow)))
+        for each_user in new_list_to_follow:
+            url_follow = 'https://www.instagram.com/web/friendships/{}/follow/'.format(each_user)
+            try:
+                follow = self.s.post(url_follow)
+                if follow.status_code == 200:
+                    self.follow_counter += 1
+                    self.followed_users.append(each_user)
+                    print('Followed {}'.format(each_user))
+                    print('Going to sleep now.')
+                    time.sleep(self.sleep_delay * 0.9 + self.sleep_delay * 0.2 * random.random())
+                    if self.unfollow:
+                        while self.follow_counter >= self.follow_per_day * 2:
+                            self.unfollow_users()
+                elif follow.status_code == 400:
+                    print('Did not follow, code 400.')
+                    self.code_400()
+            except:
+                print("Except on follow!")
         print('Followed everyone!')
 
 def unfollow_users(self):
     print("Users reached our daily limit, time to unfollow...")
-        print(self.followed_users)
-        url_unfollow = 'https://www.instagram.com/web/friendships/{}/unfollow/'.format(self.followed_users[-1])
-        try:
-            unfollow = self.s.post(url_unfollow)
-            if unfollow.status_code == 200:
-                self.follow_counter -= 1
-                print('Unfollowed {}'.format(self.followed_users[-1]))
-                del self.followed_users[0]
-                print('Going to sleep now.')
-                time.sleep(self.sleep_delay * 0.9 + self.sleep_delay * 0.2 * random.random())
-            elif unfollow.status_code == 400:
-                print('Did not unfollow, code 400.')
-                self.code_400()
+    print(self.followed_users)
+    url_unfollow = 'https://www.instagram.com/web/friendships/{}/unfollow/'.format(self.followed_users[-1])
+    try:
+        unfollow = self.s.post(url_unfollow)
+        if unfollow.status_code == 200:
+            self.follow_counter -= 1
+            print('Unfollowed {}'.format(self.followed_users[-1]))
+            del self.followed_users[0]
+            print('Going to sleep now.')
+            time.sleep(self.sleep_delay * 0.9 + self.sleep_delay * 0.2 * random.random())
+        elif unfollow.status_code == 400:
+            print('Did not unfollow, code 400.')
+            self.code_400()
     except:
         print("Except on unfollow!")
 
 def logout(self):
     try:
         self.s.post(self.url_logout)
-            self.s.cookies.clear()
-            print("Logout success!")
-            self.login_status = False
-        except:
-            print("Logout error!")
-                
-                def code_400(self):
-                    if self.error >= self.error_ban:
-time.sleep(self.time_ban)
+        self.s.cookies.clear()
+        print("Logout success!")
+        self.login_status = False
+    except:
+        print("Logout error!")
+            
+def code_400(self):
+    if self.error >= self.error_ban:
+        time.sleep(self.time_ban)
     else:
         self.error += 1
 
